@@ -1,6 +1,6 @@
 package org.maxgamer.quickshop.Listeners;
 
-import br.com.finalcraft.quickshop.integration.fakeitem.FakeItemManager;
+//import br.com.finalcraft.quickshop.integration.fakeitem.FakeItemManager;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -74,9 +74,9 @@ public class BlockListener implements Listener {
 			if (action != null) {
 				action.setAction(ShopAction.CANCELLED);
 			}
-			if (QuickShop.instance.irondome_display){
-				FakeItemManager.sendFakeItemsToThemAll(shop, true);
-			}
+//			if (QuickShop.instance.irondome_display){
+//				FakeItemManager.sendFakeItemsToThemAll(shop, true);
+//			}
 			shop.delete();
 			p.sendMessage(MsgUtil.getMessage("success-removed-shop"));
 		} else if (b.getType() == Material.WALL_SIGN) {

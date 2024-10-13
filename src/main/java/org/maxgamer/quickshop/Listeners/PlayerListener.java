@@ -2,6 +2,8 @@ package org.maxgamer.quickshop.Listeners;
 
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -192,28 +194,34 @@ public class PlayerListener implements Listener {
 		} catch (NullPointerException ex) {
 		} // if meta/displayname/stack is null. We don't really care in that case.
 	}
-	
-	@EventHandler
-	public void onInventoryClose(InventoryCloseEvent e) {
-		try {
-			final Inventory inventory = e.getInventory();
-			if (inventory == null) {
-				return;
-			}
-			
-			final Location location = inventory.getLocation();
-			if (location == null) {
-				return;
-			}
-			
-			final Shop shop = plugin.getShopManager().getShop(location);
-			if (shop == null) {
-				return;
-			}
-			
-			shop.setSignText();
-		} catch (Throwable t) {
-			
-		}
-	}
+    // Recode of the InventoryCloseEvent Avalanche
+    @EventHandler
+    public void onInventoryClose(InventoryCloseEvent e) {
+        try {
+            final Inventory inventory = e.getInventory();
+            if (inventory == null) {
+                return;
+            }
+
+            Location location = null;
+            if (inventory.getHolder() instanceof BlockState) {
+                location = ((BlockState) inventory.getHolder()).getLocation();
+            } else if (inventory.getHolder() instanceof Entity) {
+                location = ((Entity) inventory.getHolder()).getLocation();
+            }
+
+            if (location == null) {
+                return;
+            }
+
+            final Shop shop = plugin.getShopManager().getShop(location);
+            if (shop == null) {
+                return;
+            }
+
+            shop.setSignText();
+        } catch (Throwable t) {
+            // Handle exception
+        }
+    }
 }

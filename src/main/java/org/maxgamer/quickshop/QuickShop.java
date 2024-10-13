@@ -2,7 +2,7 @@ package org.maxgamer.quickshop;
 
 import br.com.finalcraft.evernifecore.util.FCItemUtils;
 import br.com.finalcraft.evernifecore.util.FCReflectionUtil;
-import br.com.finalcraft.quickshop.integration.fakeitem.FakeItemManager;
+//import br.com.finalcraft.quickshop.integration.fakeitem.FakeItemManager;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -135,7 +135,7 @@ public class QuickShop extends JavaPlugin {
 			ItemWatcher itemWatcher = new ItemWatcher(this);
 			itemWatcherTask = Bukkit.getScheduler().runTaskTimer(this, itemWatcher, 600, 600);
 		}else if (this.irondome_display){
-			FakeItemManager.initialize();
+//			FakeItemManager.initialize();
 		}
 		if (this.getConfig().getBoolean("log-actions")) {
 			// Logger Handler
